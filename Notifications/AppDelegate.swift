@@ -11,13 +11,14 @@ import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     let notificationCenter = UNUserNotificationCenter.current()
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         requestAuthorization()
+        notificationCenter.delegate = self
         return true
     }
     
@@ -65,3 +66,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+
+// метод срабатывает когда приложение на переднем плане
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
+    
+    // обработка события на реагирование уведомления
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void) {
+        if response.notification.request.identifier == "Local Notification" {
+            print("Handling notification with the local Notification Identifier")
+        }
+        completionHandler()
+    }
+    
+}

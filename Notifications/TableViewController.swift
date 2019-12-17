@@ -45,7 +45,7 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
-        cell?.textLabel?.textColor = .red
+        cell?.textLabel?.textColor = .gray
         
         let notificationType = notifications[indexPath.row]
         
