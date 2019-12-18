@@ -48,10 +48,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func scheduleNotification(notificationType: String) {
         let content = UNMutableNotificationContent()
         
+        // uid для категории действий
+        let userAction = "User Action"
+        
         content.title = notificationType
         content.body = "This is example how to create" + notificationType
         content.sound = UNNotificationSound.default
         content.badge = 1
+        content.categoryIdentifier = userAction
+        
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
         
@@ -63,6 +68,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Error: \(error.localizedDescription)")
             }
         }
+        
+        // действия пользователя в уведомлении
+        let snoozeAction = UNNotificationAction(identifier: "Snooze", title: "Snooze", options: [])
+        let deleteAction = UNNotificationAction(identifier: "Delete", title: "Delete", options: [.destructive])
+        // создаю категории для действий
+        let category = UNNotificationCategory(identifier: userAction,
+                                              actions: [snoozeAction, deleteAction],
+                                              intentIdentifiers: [],
+                                              options: [])
+        // регистрирую категорию в центре уведомлений
+        notificationCenter.setNotificationCategories([category])
     }
 }
 
@@ -84,6 +100,21 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if response.notification.request.identifier == "Local Notification" {
             print("Handling notification with the local Notification Identifier")
         }
+        
+        switch response.actionIdentifier {
+        case UNNotificationDismissActionIdentifier:
+            print("Dismiss action")
+        case UNNotificationDefaultActionIdentifier:
+            print("Default")
+        case "Snooze":
+            print("Snooze")
+            scheduleNotification(notificationType: "Reminder")
+        case "Delete":
+            print("Delete")
+        default:
+            print("Unknown action")
+        }
+        
         completionHandler()
     }
     
