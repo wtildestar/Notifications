@@ -43,6 +43,9 @@ class Notifications: NSObject, UNUserNotificationCenterDelegate {
         content.sound = UNNotificationSound.default
         content.badge = 1
         content.categoryIdentifier = userAction
+        content.threadIdentifier = notificationType
+        content.summaryArgumentCount = 10
+        content.summaryArgument = notificationType
         
         guard let path = Bundle.main.path(forResource: "notify", ofType: "png") else { return }
         
@@ -60,9 +63,10 @@ class Notifications: NSObject, UNUserNotificationCenterDelegate {
         }
         
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         
-        let identifier = "Local Notification"
+        // позволяет определять идентификатор сообщения для группировки уведомлений
+        let identifier = UUID().uuidString
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         
         notificationCenter.add(request) { (error) in
@@ -72,13 +76,23 @@ class Notifications: NSObject, UNUserNotificationCenterDelegate {
         }
         
         // действия пользователя в уведомлении
-        let snoozeAction = UNNotificationAction(identifier: "Snooze", title: "Snooze", options: [])
-        let deleteAction = UNNotificationAction(identifier: "Delete", title: "Delete", options: [.destructive])
+        let actions = [
+            UNNotificationAction(identifier: "Snooze", title: "Snooze", options: []),
+            UNNotificationAction(identifier: "Delete", title: "Delete", options: [.destructive])
+        ]
+        
         // создаю категории для действий
-        let category = UNNotificationCategory(identifier: userAction,
-                                              actions: [snoozeAction, deleteAction],
-                                              intentIdentifiers: [],
-                                              options: [])
+//        let category = UNNotificationCategory(identifier: userAction,
+//                                              actions: [snoozeAction, deleteAction],
+//                                              intentIdentifiers: [],
+//                                              options: [])
+        let category = UNNotificationCategory(
+            identifier: userAction,
+            actions: actions,
+            intentIdentifiers: [],
+            hiddenPreviewsBodyPlaceholder: nil,
+            categorySummaryFormat: "%u новых уведомлений в разделе %@",
+            options: [])
         // регистрирую категорию в центре уведомлений
         notificationCenter.setNotificationCategories([category])
     }
