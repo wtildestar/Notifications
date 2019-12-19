@@ -14,6 +14,7 @@
 		D7DAF66023A8EF0A00598434 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7DAF65F23A8EF0A00598434 /* Assets.xcassets */; };
 		D7DAF66323A8EF0A00598434 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7DAF66123A8EF0A00598434 /* LaunchScreen.storyboard */; };
 		D7DB61BE23AA9DD300ADB472 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DB61BD23AA9DD300ADB472 /* Notifications.swift */; };
+		D7DB61C023AB5E4800ADB472 /* notify.png in Resources */ = {isa = PBXBuildFile; fileRef = D7DB61BF23AB5E4800ADB472 /* notify.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		D7DAF66223A8EF0A00598434 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D7DAF66423A8EF0A00598434 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7DB61BD23AA9DD300ADB472 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		D7DB61BF23AB5E4800ADB472 /* notify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notify.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				D7DAF65623A8EF0700598434 /* AppDelegate.swift */,
 				D7DB61BD23AA9DD300ADB472 /* Notifications.swift */,
 				D7DAF65823A8EF0700598434 /* SceneDelegate.swift */,
+				D7DB61BF23AB5E4800ADB472 /* notify.png */,
 				D7DAF65A23A8EF0700598434 /* TableViewController.swift */,
 				D7DAF65C23A8EF0700598434 /* Main.storyboard */,
 				D7DAF65F23A8EF0A00598434 /* Assets.xcassets */,
@@ -130,6 +133,7 @@
 			files = (
 				D7DAF66323A8EF0A00598434 /* LaunchScreen.storyboard in Resources */,
 				D7DAF66023A8EF0A00598434 /* Assets.xcassets in Resources */,
+				D7DB61C023AB5E4800ADB472 /* notify.png in Resources */,
 				D7DAF65E23A8EF0700598434 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
